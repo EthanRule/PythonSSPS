@@ -402,12 +402,16 @@ class PSOperators:
         endIndex = self.opPop() + 1
         increment = self.opPop()
         beginIndex = self.opPop()
-        if endIndex == 2:
-            endIndex -= 1
+        staticLink = beginIndex[0]
+        if isinstance(beginIndex, tuple):
+            beginIndex = beginIndex[1]
+        
+       
         for i in range(beginIndex, endIndex, increment):
             self.opPush(i)
             # apply method introduces new empty tuple, and removes it on completion of the codeArray
-            codeArrayValueObject.apply(self)
+            print("here")
+            codeArrayValueObject.apply(self, staticLink)
 
     def clearBoth(self):
         self.opstack[:] = []

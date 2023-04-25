@@ -125,7 +125,7 @@ if __name__ == '__main__':
             for expr in expr_list:
                 # print(expr)
                 expr.eval(ps_env_s)
-                # print(ps_env_s.opstack)
+                #print(ps_env_s.opstack)
                 # print(ps_env_s.dictstack)
             print(RED+"\nDYNAMIC"+RESET)
             # interpret using dynamic scoping rule
