@@ -52,7 +52,7 @@ class PSName(Expr):
         # lookup returns a tuple (index, {})
 
         index = ps_env.lookup(self.var_name)
-        #print(index)
+        # print(index)
         return index[0]
 
     def eval(self, ps_env):
@@ -63,9 +63,10 @@ class PSName(Expr):
         else:
             value = ps_env.lookup(self.var_name)  # value is a tuple
             if isinstance(value[1], CodeArrayValue):
-                print(ps_env)
-                print(self.index_of_definitions_stack_entry(ps_env))
-                value[1].apply(ps_env, self.index_of_definitions_stack_entry(ps_env))
+                # print(ps_env)
+                # print(self.index_of_definitions_stack_entry(ps_env))
+                value[1].apply(
+                    ps_env, self.index_of_definitions_stack_entry(ps_env))
             else:
                 ps_env.opPush(value)
 
@@ -156,7 +157,7 @@ class CodeArrayValue(Value):
         ps_env.dictPush({}, static_ind)
         for i in self.body:
             i.eval(ps_env)
-            #print(i)
+            # print(i)
         # Pop the dict after function is done
         x = ps_env.dictPop()
 

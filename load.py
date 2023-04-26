@@ -78,37 +78,42 @@ testinput8 = """
     """
 
 # Additional test inputs min 3
-# mytest1 = """
-#     /x 14 def
-#     /Y { /x 40 def A stack }
-#     /Z { /x 12 def /Y { x 1 add}}
-#     Z
-#     """
+myTest1 = """
+    /y 2 def
+    /g { y stack } def
+    /z { /y 14 def g } def
+    z
+    """
 
-# mytest2 = """
-#     /c 1 dict def
-#     /C { /c 1 dict def  c /m 9 put A  j c /m get stack } def
-#     /T { c /m 0 put } def
-#     /j 10 def
-#     /G { /c 1 dict def /T { c /m 99 put } def /j 5 def C } def
-#     G
-#     """
+myTest2 = """
+    /y 13 def
+    /d 30 def
+    /num {/y 23 def d} def
+    /test
+    	{ /d 1 def
+	      /nums { (nums) d stack} def
+	      d y
+	      num
+          y
+	      nums
+	    } def
+    d
+    test
+        """
 
-# # mytest3 = """
-#     /y  1 dict def
-#     y /i 22 put
-#     /G { /y 1 dict def y /i 33 put A stack } def
-#     /A { (global)  y /i get } def
-#     /y 1 dict def
-#     /H { /y 1 dict def y /i 11 put /A { (function H) y /i get  } def G } def
-#     B
-#     """
+myTest3 = """
+    /t 4 def
+    (static_y) dup 8 3 put /t exch def
+    /n { t stack } def
+    /h { /t (dynamic_x) def n } def
+    h
+    """
 
 
 tests = [testinput1, testinput2, testinput3, testinput4,
-         testinput5, testinput6, testinput7, testinput8]
+         testinput5, testinput6, testinput7, testinput8, myTest1, myTest2, myTest3]
 
-tests = [testinput5]
+# tests = [testinput5]
 
 # program start
 if __name__ == '__main__':
@@ -125,7 +130,7 @@ if __name__ == '__main__':
             for expr in expr_list:
                 # print(expr)
                 expr.eval(ps_env_s)
-                #print(ps_env_s.opstack)
+                # print(ps_env_s.opstack)
                 # print(ps_env_s.dictstack)
             print(RED+"\nDYNAMIC"+RESET)
             # interpret using dynamic scoping rule

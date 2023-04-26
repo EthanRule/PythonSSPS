@@ -113,7 +113,6 @@ class PSOperators:
             if (isinstance(op1, int) or isinstance(op1, float)) and (isinstance(op2, int) or isinstance(op2, float)):
                 self.opPush(op1 + op2)
             else:
-                print("Error: add - one of the operands is not a number value")
                 self.opPush(op1)
                 self.opPush(op2)
         else:
@@ -126,7 +125,6 @@ class PSOperators:
             if (isinstance(op1, int) or isinstance(op1, float)) and (isinstance(op2, int) or isinstance(op2, float)):
                 self.opPush(op2 - op1)
             else:
-                print("Error: add - one of the operands is not a number value")
                 self.opPush(op1)
                 self.opPush(op2)
         else:
@@ -139,7 +137,6 @@ class PSOperators:
             if (isinstance(op1, int) or isinstance(op1, float)) and (isinstance(op2, int) or isinstance(op2, float)):
                 self.opPush(op2 * op1)
             else:
-                print("Error: add - one of the operands is not a number value")
                 self.opPush(op1)
                 self.opPush(op2)
         else:
@@ -306,9 +303,6 @@ class PSOperators:
             self.opPush(len(n.value) - 2)
         elif isinstance(n, DictionaryValue):
             self.opPush(len(n.value.keys()))
-        else:
-            print(
-                "Error: cannot determine length of a value that is not StringValue or DictionaryValue")
 
     def get(self):
         iKey = self.opPop()
@@ -317,9 +311,6 @@ class PSOperators:
             self.opPush(ord(val.value[iKey + 1]))
         elif isinstance(val, DictionaryValue):
             self.opPush(val.value[iKey])
-        else:
-            print(
-                "Error: cannot determine length of a value that is not StringValue or DictionaryValue")
 
     def put(self):
         item = self.opPop()
@@ -330,9 +321,6 @@ class PSOperators:
                 chr(item) + val.value[iKey + 2:len(val.value)]
         elif isinstance(val, DictionaryValue):
             val.value[iKey] = item
-        else:
-            print(
-                "Error: cannot determine length of a value that is not StringValue or DictionaryValue")
 
     def getinterval(self):
         count = self.opPop()
@@ -350,8 +338,6 @@ class PSOperators:
             substring = substring.value[1:-1]
             val.value = val.value[:index] + substring + \
                 val.value[index+len(substring):]
-        else:
-            print("Error: cannot determine length of a value that is not StringValue")
 
     def search(self):
         delimiter = self.opPop()
@@ -367,9 +353,6 @@ class PSOperators:
             else:
                 self.opPush(inputstr)
                 self.opPush((False))
-        else:
-            print(
-                "Error: cannot determine length of a value that is not StringValue or DictionaryValue")
 
     def psDef(self):
         if len(self.dictstack) == 0:
@@ -410,7 +393,6 @@ class PSOperators:
         for i in range(beginIndex, endIndex, increment):
             self.opPush(i)
             # apply method introduces new empty tuple, and removes it on completion of the codeArray
-            print("here")
             codeArrayValueObject.apply(self, staticLink)
 
     def clearBoth(self):
